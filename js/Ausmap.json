@@ -20,108 +20,173 @@
   "transform": [{"filter": "datum.UniversityGraduatesPerc > Uni_Graduates"}],
   "vconcat": [
     {
-      "width": 600,
-      "height": 400,
-      "layer": [
+      "hconcat": [
         {
-          "mark": "circle",
-          "encoding": {
-            "x": {
-              "field": "Coalition",
-              "type": "quantitative",
-              "title": "Percentage Coalition Votes",
-              "scale": {"domain": [15, 75]}
+          "width": 500,
+          "height": 325,
+          "layer": [
+            {
+              "mark": "circle",
+              "encoding": {
+                "x": {
+                  "field": "Coalition",
+                  "type": "quantitative",
+                  "title": "Percentage Coalition Votes",
+                  "scale": {"domain": [15, 75]}
+                },
+                "y": {
+                  "field": "WeeklyIncome",
+                  "type": "quantitative",
+                  "title": "Weekly Income ($)",
+                  "scale": {"domain": [800, 2000]}
+                },
+                "color": {"field": "State", "type": "nominal"},
+                "size": {
+                  "field": "UniversityGraduatesPerc",
+                  "title": "University Graduates (%)",
+                  "type": "quantitative",
+                  "scale": {
+                    "type": "threshold",
+                    "domain": [25, 30, 35, 40],
+                    "range": [65, 150, 200, 350, 490]
+                  }
+                },
+                "tooltip": [
+                  {"field": "State", "type": "nominal"},
+                  {
+                    "field": "WeeklyIncome",
+                    "type": "quantitative",
+                    "format": ",",
+                    "title": "Weekly Income"
+                  },
+                  {
+                    "field": "IncomeRank",
+                    "type": "nominal",
+                    "format": ",",
+                    "title": "Income Rank /8"
+                  },
+                  {
+                    "field": "UniversityGraduatesPerc",
+                    "type": "quantitative",
+                    "format": ",",
+                    "title": "% Uni. Graduates"
+                  },
+                  {
+                    "field": "Coalition",
+                    "type": "nominal",
+                    "format": ",",
+                    "title": "Coalition Votes (%)"
+                  },
+                  {
+                    "field": "Labour",
+                    "type": "nominal",
+                    "format": ",",
+                    "title": "Labor Votes (%)"
+                  }
+                ]
+              }
             },
-            "y": {
-              "field": "WeeklyIncome",
-              "type": "quantitative",
-              "title": "Weekly Income ($)",
-              "scale": {"domain": [800, 2000]}
-            },
-            "color": {"field": "State", "type": "nominal"},
-            "size": {
-              "field": "UniversityGraduatesPerc",
-              "title": "University Graduates (%)",
-              "type": "quantitative",
-              "scale": {
-                "type": "threshold",
-                "domain": [25, 30, 35, 40],
-                "range": [65, 150, 200, 350, 490]
+            {
+              "data": {"values": [{}]},
+              "mark": {
+                "type": "text",
+                "align": "left",
+                "baseline": "bottom",
+                "text": [
+                  "The Bubble Chart depicts how income may be negatively",
+                  "correlated with income..."
+                ],
+                "dx": 0,
+                "dy": 225
               }
             }
-          },
-          "tooltip": [
-            {"field": "State", "type": "nominal"},
+          ]
+        },
+        {
+          "width": 500,
+          "height": 400,
+          "title": "Percentage Party Preferences by States and Territories",
+          "projection": {"type": "Mercator"},
+          "layer": [
             {
-              "field": "WeeklyIncome",
-              "type": "quantitative",
-              "format": ",",
-              "title": "Weekly Income"
+              "data": {
+                "url": "https://raw.githubusercontent.com/monashOsman/SampleRep/main/js/STE_2021_AUST_GDA2020.topojson",
+                "format": {
+                  "type": "topojson",
+                  "feature": "STE_2021_AUST_GDA2020"
+                }
+              },
+              "mark": {
+                "type": "geoshape",
+                "fill": "lightgray",
+                "stroke": "white"
+              }
             },
             {
-              "field": "IncomeRank",
-              "type": "nominal",
-              "format": ",",
-              "title": "Income Rank /8"
-            },
-            {
-              "field": "UniversityGraduatesPerc",
-              "type": "quantitative",
-              "format": ",",
-              "title": "% Uni. Graduates"
-            },
-            {
-              "field": "Coalition",
-              "type": "nominal",
-              "format": ",",
-              "title": "Coalition Votes (%)"
-            },
-            {
-              "field": "Labour",
-              "type": "nominal",
-              "format": ",",
-              "title": "Labor Votes (%)"
+              "data": {
+                "url": "https://raw.githubusercontent.com/monashOsman/SampleRep/main/data/electionresults.csv"
+              },
+              "mark": {"type": "circle", "tooltip": {"content": "data"}},
+              "encoding": {
+                "latitude": {"field": "Longitude", "type": "quantitative"},
+                "longitude": {"field": "Latitude", "type": "quantitative"},
+                "size": {
+                  "field": "Greens",
+                  "type": "quantitative",
+                  "title": "Percentage of Greens votes",
+                  "scale": {"domain": [12, 20]}
+                },
+                "color": {
+                  "field": "Percentage Coalition Votes",
+                  "type": "quantitative",
+                  "title": "Percentage of Coalition votes",
+                  "scale": {"scheme": "redblue"}
+                }
+              }
             }
           ]
         }
       ]
     },
     {
-      "width": 750,
-      "height": 400,
-      "title": "Percentage Party Preferences by States and Territories",
-      "projection": {"type": "Mercator"},
+      "width": 500,
+      "height": 300,
+      "title": "Proportion of Coalition's Votes (per Capita) by States",
+      "description": "",
+      "data": {
+        "values": [
+          {"category": "ACT", "value": 37},
+          {"category": "NT", "value": 43},
+          {"category": "WA", "value": 49},
+          {"category": "NSW", "value": 53},
+          {"category": "VIC", "value": 50},
+          {"category": "SA", "value": 51},
+          {"category": "QLD", "value": 62},
+          {"category": "TAS", "value": 59}
+        ]
+      },
+      "encoding": {
+        "theta": {"field": "value", "type": "quantitative", "stack": true},
+        "color": {"field": "category", "type": "nominal", "legend": null}
+      },
       "layer": [
+        {"mark": {"type": "arc", "outerRadius": 90}},
         {
-          "data": {
-            "url": "https://raw.githubusercontent.com/monashOsman/SampleRep/main/js/STE_2021_AUST_GDA2020.topojson",
-            "format": {"type": "topojson", "feature": "STE_2021_AUST_GDA2020"}
-          },
-          "mark": {"type": "geoshape", "fill": "lightgray", "stroke": "white"}
-        },
-        {
-          "data": {
-            "url": "https://raw.githubusercontent.com/monashOsman/SampleRep/main/data/electionresults.csv"
-          },
-          "mark": {"type": "circle", "tooltip": {"content": "data"}},
-          "encoding": {
-            "latitude": {"field": "Longitude", "type": "quantitative"},
-            "longitude": {"field": "Latitude", "type": "quantitative"},
-            "size": {
-              "field": "Greens",
-              "type": "quantitative",
-              "title": "Percentage of Greens votes",
-              "scale": {"domain": [12, 20]}
-            },
-            "color": {
-              "field": "Percentage Coalition Votes",
-              "type": "quantitative",
-              "title": "Percentage of Coalition votes",
-              "scale": {"scheme": "redblue"}
-            }
-          }
+          "mark": {"type": "text", "radius": 100},
+          "encoding": {"text": {"field": "category", "type": "nominal"}}
         }
       ]
+    },
+    {
+      "data": {"values": [{}]},
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "baseline": "bottom",
+        "text": ["Similar chart for Labor votes", ""],
+        "dx": 275,
+        "dy": -300
+      }
     }
   ],
   "config": {}
