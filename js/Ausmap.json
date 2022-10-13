@@ -183,8 +183,36 @@
         "type": "text",
         "align": "left",
         "baseline": "bottom",
-        "text": ["Similar chart for Labor votes", ""],
+        "text": ["''Similar chart for Labor votes''", ""],
         "dx": 275,
+        "dy": -300
+      }
+    },
+    {
+      "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+      "title": "State Preferences over time (Orange = NSW, Green = VIC, Purple = SA)",
+      "description": "Stock prices of 5 Tech Companies over Time.",
+      "data": {
+        "url": "https://raw.githubusercontent.com/monashOsman/WeekTen/main/data/swingstates2.csv"
+      },
+      "mark": "line",
+      "encoding": {
+        "x": {"field": "Year", "type": "temporal"},
+        "y": {"field": "Percentage_Coalition", "type": "quantitative"},
+        "color": {"field": "STATE", "type": "nominal"}
+      }
+    },
+    {
+      "data": {"values": [{}]},
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "baseline": "bottom",
+        "text": [
+          "The line charts show the swing states and that",
+          "Victoria and South Australia may change sides next election...."
+        ],
+        "dx": 150,
         "dy": -300
       }
     }
